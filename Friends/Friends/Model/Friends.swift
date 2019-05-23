@@ -9,7 +9,7 @@
 import UIKit
 
 struct Friends {
-    let image: UIImage
+    var image: UIImage
     
     init(image: UIImage) {
         self.image = image

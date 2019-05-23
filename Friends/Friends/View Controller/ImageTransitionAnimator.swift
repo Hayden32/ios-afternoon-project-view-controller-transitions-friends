@@ -41,13 +41,16 @@ class ImageTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let transitionalLabelFrame = containerView.convert(fromLabel.bounds, from: fromLabel)
         let transitionalLabelEndFrame = containerView.convert(toLabel.bounds, from: toLabel)
         
-        
+        let transitionalImage = UIImageView(frame: transitionalImageFrame)
         let transitionalLabel = UILabel(frame: transitionalLabelFrame)
         
         transitionalLabel.text = fromLabel.text
         transitionalLabel.font = fromLabel.font
         transitionalLabel.textColor = fromLabel.textColor
         
+        transitionalImage.image = fromImage.image
+        
+        containerView.addSubview(transitionalImage)
         containerView.addSubview(transitionalLabel)
         
         let animationDuration = self.transitionDuration(using: transitionContext)
@@ -60,6 +63,8 @@ class ImageTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             transitionalLabel.frame = transitionalLabelEndFrame
             transitionalLabel.textColor = toLabel.textColor
             
+            transitionalImage.frame = transitionalImageEndFrame
+            
         }) { (_) in
             
             transitionalLabel.removeFromSuperview()
@@ -70,7 +75,5 @@ class ImageTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
     }
-    
-    
     
 }
